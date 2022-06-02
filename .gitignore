@@ -65,3 +65,4 @@ typings/
 /configuration.json
 /configuration_public.json
 /deploy/configuration/local
+/dist/
