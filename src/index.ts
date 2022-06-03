@@ -1,8 +1,15 @@
-import { GOLDEN_DARK_PALETTES, GOLDEN_LIGHT_PALETTES, GOLDEN_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, REDUCED_CHROMA_TOLERANCE, DEFAULT_CHROMA_TOLERANCE } from './variables.js';
-import { LCHColor } from './color.js';
-import { lab2hue, rgb2lab, lab2lch, lch2rgb } from './util.js';
+import {
+  DEFAULT_CHROMA_TOLERANCE,
+  DEFAULT_LIGHTNESS_TOLERANCE,
+  GOLDEN_DARK_PALETTES,
+  GOLDEN_LIGHT_PALETTES,
+  GOLDEN_PALETTES,
+  REDUCED_CHROMA_TOLERANCE
+} from './variables.js';
+import {LABColor, LCHColor, RGBColor} from './colors';
+import {lab2hue, lab2lch, lch2rgb, rgb2lab} from './utils';
 
-function findClosestGoldenPalette(labColor, goldenPalettes = GOLDEN_PALETTES) {
+function findClosestGoldenPalette(labColor:LABColor, goldenPalettes = GOLDEN_PALETTES) {
   let minEmpfindungDifference = Infinity;
   let closestGoldenPallete = goldenPalettes[0];
   let closestColorIndex = -1;
@@ -67,7 +74,7 @@ function findClosestGoldenPalette(labColor, goldenPalettes = GOLDEN_PALETTES) {
 
       const empfindungDifference = Math.sqrt(
         Math.pow((labColor.lightness - goldenColor.lightness) / (lightnessCompensation), 2) +
-        Math.pow(deltaAdjustedChroma / (1 * chromaCompensation), 2) +
+        Math.pow(deltaAdjustedChroma / chromaCompensation, 2) +
         Math.pow(deltaHue / hueCompensation, 2) +
         (deltaAdjustedChroma / chromaCompensation) * hueRotation * (deltaHue / hueCompensation)
       );
@@ -81,7 +88,7 @@ function findClosestGoldenPalette(labColor, goldenPalettes = GOLDEN_PALETTES) {
   return { closestGoldenPallete, closestColorIndex };
 }
 
-function generatePalette(sourceRgbColor, goldenPalettes = GOLDEN_PALETTES, lightnessTolerance = DEFAULT_LIGHTNESS_TOLERANCE, chromaTolerance = DEFAULT_CHROMA_TOLERANCE) {
+function generatePalette(sourceRgbColor: RGBColor, goldenPalettes = GOLDEN_PALETTES, lightnessTolerance = DEFAULT_LIGHTNESS_TOLERANCE, chromaTolerance = DEFAULT_CHROMA_TOLERANCE) {
   const sourceLabColor = rgb2lab(sourceRgbColor);
   const { closestGoldenPallete, closestColorIndex } = findClosestGoldenPalette(sourceLabColor, goldenPalettes);
   const closestGoldenLabColor = closestGoldenPallete[closestColorIndex];
@@ -122,10 +129,10 @@ function generatePalette(sourceRgbColor, goldenPalettes = GOLDEN_PALETTES, light
   });
 }
 
-const generateAccentPalette = (rgbColor) => generatePalette(rgbColor, GOLDEN_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, DEFAULT_CHROMA_TOLERANCE);
+const generateAccentPalette = (rgbColor: RGBColor) => generatePalette(rgbColor, GOLDEN_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, DEFAULT_CHROMA_TOLERANCE);
 
-const generateLightPalette = (rgbColor) => generatePalette(rgbColor, GOLDEN_LIGHT_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, REDUCED_CHROMA_TOLERANCE);
+const generateLightPalette = (rgbColor: RGBColor) => generatePalette(rgbColor, GOLDEN_LIGHT_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, REDUCED_CHROMA_TOLERANCE);
 
-const generateDarkPalette = (rgbColor) => generatePalette(rgbColor, GOLDEN_DARK_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, DEFAULT_CHROMA_TOLERANCE);
+const generateDarkPalette = (rgbColor: RGBColor) => generatePalette(rgbColor, GOLDEN_DARK_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, DEFAULT_CHROMA_TOLERANCE);
 
 export { generateAccentPalette, generateLightPalette, generateDarkPalette };

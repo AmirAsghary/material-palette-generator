@@ -1,12 +1,17 @@
 import {ACCURACY} from './variables.js';
 
-const checkRange = (value, maxValue, label) => {
+const checkRange = (value: number, maxValue: number, label: string) => {
   if (isNaN(value) || 0 > value || value > maxValue)
     throw new RangeError(value + ' for ' + label + ' is not between 0 and ' + maxValue);
 };
 
 export class LABColor {
-  constructor(lightness, a, b, alpha = 1) {
+  lightness: number;
+  a: any;
+  b: any;
+  alpha: number;
+
+  constructor(lightness: number, a: any, b: any, alpha = 1) {
     this.lightness = lightness;
     this.a = a;
     this.b = b;
@@ -16,7 +21,7 @@ export class LABColor {
   }
 
   // equals() is never be called
-  equals(a) {
+  equals(a: LABColor) {
     return (
       1e-4 > Math.abs(this.lightness - a.lightness) &&
       1e-4 > Math.abs(this.a - a.a) &&
@@ -27,7 +32,12 @@ export class LABColor {
 }
 
 export class LCHColor {
-  constructor(lightness, chroma, hue, alpha = 1) {
+  lightness: number;
+  chroma: any;
+  hue: any;
+  alpha: number;
+
+  constructor(lightness: number, chroma: any, hue: any, alpha = 1) {
     this.lightness = lightness;
     this.chroma = chroma;
     this.hue = hue;
@@ -38,8 +48,7 @@ export class LCHColor {
     checkRange(alpha, 1, 'alpha');
   };
 
-  // equals() is never be called
-  equals(a) {
+  equals(a: LCHColor) {
     return (
       1e-4 > Math.abs(this.lightness - a.lightness) &&
       1e-4 > Math.abs(this.chroma - a.chroma) &&
@@ -50,7 +59,12 @@ export class LCHColor {
 }
 
 export class RGBColor {
-  constructor(red, green, blue, alpha = 1) {
+  red: number;
+  green: any;
+  blue: any;
+  alpha: number;
+
+  constructor(red: number, green: number, blue: number, alpha = 1) {
     this.red = red;
     this.green = green;
     this.blue = blue;
@@ -61,7 +75,7 @@ export class RGBColor {
     checkRange(alpha, 1, 'alpha');
   }
 
-  equals(rgbColor) {
+  equals(rgbColor: RGBColor) {
     return (
       Math.abs(this.red - rgbColor.red) < ACCURACY &&
       Math.abs(this.green - rgbColor.green) < ACCURACY &&
@@ -69,4 +83,18 @@ export class RGBColor {
       Math.abs(this.alpha - rgbColor.alpha) < ACCURACY
     );
   }
+}
+
+export class XYZColor {
+  x: any;
+  y: any
+  z: any
+  alpha: number;
+
+  constructor(x: any, y: any, z: any, alpha = 1) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.alpha = alpha;
+  };
 }

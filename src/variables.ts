@@ -1,5 +1,5 @@
-import {LABColor} from './color.js';
-import {hex2lab} from './util.js';
+import {LABColor} from './colors';
+import {hex2lab} from './utils';
 
 const ACCURACY = Math.pow(2, -16);
 

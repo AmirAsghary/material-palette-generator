@@ -1,26 +1,27 @@
-import {LABColor, LCHColor, RGBColor, XYZColor} from './color.js';
+import {LABColor, LCHColor, RGBColor, XYZColor} from './colors';
 
-function hex2decimal(hexColor) {
+function hex2decimal(hexColor: string) {
     if (!/^[a-fA-F0-9]+$/.test(hexColor)) throw Error('Invalid hex string: ' + hexColor);
     return parseInt(hexColor, 16);
 }
 
-function hex2rgb(hexColor) {
+function hex2rgb(hexColor: string) {
     let b;
     if (!/^[a-fA-F0-9]{3,8}$/.test(hexColor)) {
         throw Error('Invalid hex color string: ' + hexColor);
     }
     if (3 === hexColor.length || 4 === hexColor.length) {
         b = /^(.)(.)(.)(.)?$/
-            .exec(hexColor)
-            .slice(1, 5)
+            .exec(hexColor)?.slice(1, 5)
             .map(a => a ? a + a : 'ff');
     } else if (6 === hexColor.length || 8 === hexColor.length) {
-        b = /^(..)(..)(..)(..)?$/.exec(hexColor).slice(1, 5);
-        if (typeof b[3] === 'undefined') b[3] = 'ff';
+        b = /^(..)(..)(..)(..)?$/.exec(hexColor)?.slice(1, 5);
+        if (b && typeof b[3] === 'undefined') b[3] = 'ff';
     } else {
         throw Error('Invalid hex color string: ' + hexColor);
     }
+
+    if (!b) return new RGBColor(0, 0, 0, 0);
 
     const red = hex2decimal(b[0]) / 255;
     const green = hex2decimal(b[1]) / 255;
@@ -30,13 +31,13 @@ function hex2rgb(hexColor) {
     return new RGBColor(red, green, blue, alpha);
 }
 
-function lab2hue(a, b) {
+function lab2hue(a: number, b: number) {
     if (1e-4 > Math.abs(a) && 1e-4 > Math.abs(b)) return 0;
     a = (180 * Math.atan2(a, b)) / Math.PI;
     return 0 <= a ? a : a + 360;
 }
 
-function lab2lch(labColor) {
+function lab2lch(labColor: LABColor) {
     return new LCHColor(
         labColor.lightness,
         Math.sqrt(Math.pow(labColor.a, 2) + Math.pow(labColor.b, 2)),
@@ -45,7 +46,7 @@ function lab2lch(labColor) {
     );
 }
 
-function lab2xyz(labColor) {
+function lab2xyz(labColor: LABColor) {
     let x;
     let y;
     let z;
@@ -69,7 +70,7 @@ function lab2xyz(labColor) {
     return new XYZColor(x, y, z, labColor.alpha);
 }
 
-function lch2lab(lchColor) {
+function lch2lab(lchColor: LCHColor) {
     const hr = lchColor.hue / 360 * 2 * Math.PI;
     const a = lchColor.chroma * Math.cos(hr);
     const b = lchColor.chroma * Math.sin(hr);
@@ -77,7 +78,7 @@ function lch2lab(lchColor) {
     return new LABColor(lchColor.lightness, a, b, lchColor.alpha);
 }
 
-function rgb2lab(rgbColor) {
+function rgb2lab(rgbColor: RGBColor) {
     const red = rgb2xyz(rgbColor.red);
     const green = rgb2xyz(rgbColor.green);
     const blue = rgb2xyz(rgbColor.blue);
@@ -91,11 +92,11 @@ function rgb2lab(rgbColor) {
     );
 }
 
-function rgb2xyz(x) {
+function rgb2xyz(x: number) {
     return 0.04045 >= x ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
 }
 
-function xyz2lab(t) {
+function xyz2lab(t: number) {
     const t0 = 4 / 29;
     const t1 = 6 / 29;
     const t2 = 3 * Math.pow(t1, 2);
@@ -103,7 +104,7 @@ function xyz2lab(t) {
     return t > t3 ? Math.pow(t, 1 / 3) : t / t2 + t0;
 }
 
-function xyz2rgb(xyzColor) {
+function xyz2rgb(xyzColor: XYZColor) {
     let r;
     let g;
     let b;
@@ -124,13 +125,11 @@ function xyz2rgb(xyzColor) {
     return new RGBColor(r, g, b, xyzColor.alpha);
 }
 
-// Function added on refactor
-
-function hex2lab(hexColor) {
+function hex2lab(hexColor: string) {
     return rgb2lab(hex2rgb(hexColor));
 }
 
-function lch2rgb(lchColor) {
+function lch2rgb(lchColor: LCHColor) {
     return xyz2rgb(lab2xyz(lch2lab(lchColor)));
 }
 
