@@ -6,6 +6,7 @@ function hex2decimal(hexColor: string) {
 }
 
 function hex2rgb(hexColor: string) {
+    hexColor = hexColor.replace('#', '');
     let b;
     if (!/^[a-fA-F0-9]{3,8}$/.test(hexColor)) {
         throw Error('Invalid hex color string: ' + hexColor);
@@ -135,5 +136,5 @@ function lch2rgb(lchColor: LCHColor) {
 
 export {
     lab2hue, rgb2lab, lab2lch, lch2rgb,
-    hex2lab
+    hex2lab, hex2rgb
 };

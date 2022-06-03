@@ -7,7 +7,7 @@ import {
   REDUCED_CHROMA_TOLERANCE
 } from './variables.js';
 import {LABColor, LCHColor, RGBColor} from './colors';
-import {lab2hue, lab2lch, lch2rgb, rgb2lab} from './utils';
+import {hex2rgb, lab2hue, lab2lch, lch2rgb, rgb2lab} from './utils';
 
 function findClosestGoldenPalette(labColor:LABColor, goldenPalettes = GOLDEN_PALETTES) {
   let minEmpfindungDifference = Infinity;
@@ -129,10 +129,30 @@ function generatePalette(sourceRgbColor: RGBColor, goldenPalettes = GOLDEN_PALET
   });
 }
 
-const generateAccentPalette = (rgbColor: RGBColor) => generatePalette(rgbColor, GOLDEN_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, DEFAULT_CHROMA_TOLERANCE);
+function generateAccentPalette(baseColor: RGBColor | string) {
+  let srcColor = baseColor;
+  if (typeof srcColor === 'string')
+    srcColor = hex2rgb(srcColor);
+  return generatePalette(srcColor, GOLDEN_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, DEFAULT_CHROMA_TOLERANCE)
+}
 
-const generateLightPalette = (rgbColor: RGBColor) => generatePalette(rgbColor, GOLDEN_LIGHT_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, REDUCED_CHROMA_TOLERANCE);
+function generateLightPalette(baseColor: RGBColor | string) {
+  let srcColor = baseColor;
+  if (typeof srcColor === 'string')
+    srcColor = hex2rgb(srcColor);
+  return generatePalette(srcColor, GOLDEN_LIGHT_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, REDUCED_CHROMA_TOLERANCE)
+}
 
-const generateDarkPalette = (rgbColor: RGBColor) => generatePalette(rgbColor, GOLDEN_DARK_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, DEFAULT_CHROMA_TOLERANCE);
+function generateDarkPalette(baseColor: RGBColor | string) {
+  let srcColor = baseColor;
+  if (typeof srcColor === 'string')
+    srcColor = hex2rgb(srcColor);
+  return generatePalette(srcColor, GOLDEN_DARK_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, DEFAULT_CHROMA_TOLERANCE)
+}
 
-export { generateAccentPalette, generateLightPalette, generateDarkPalette };
+export {
+  RGBColor,
+  generateAccentPalette,
+  generateLightPalette,
+  generateDarkPalette
+};
