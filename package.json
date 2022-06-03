@@ -1,11 +1,11 @@
 {
-  "name": "material-palette-generator",
+  "name": "materialifer",
   "version": "1.0.0",
   "description": "Material design palette generator",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eugeneford/material-palette-generator.git"
+    "url": "https://github.com/AmirAsghary/materialifer.git"
   },
   "scripts": {
     "build": "rollup -c --environment NODE_ENV:production",
@@ -14,7 +14,8 @@
   "keywords": [
     "colors",
     "palette",
-    "generator"
+    "generator",
+    "material"
   ],
   "author": "Amir Asghary",
   "license": "MIT",
