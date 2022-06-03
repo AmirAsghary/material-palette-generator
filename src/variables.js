@@ -1,5 +1,5 @@
-import { RGBColor, LABColor } from './color.js';
-import { hex2lab } from './util.js';
+import {LABColor} from './color.js';
+import {hex2lab} from './util.js';
 
 const ACCURACY = Math.pow(2, -16);
 
@@ -304,21 +304,3 @@ const DEFAULT_CHROMA_TOLERANCE = [ //standard deviation for chroma in each tone,
 ];
 
 export { GOLDEN_DARK_PALETTES, GOLDEN_LIGHT_PALETTES, GOLDEN_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, REDUCED_CHROMA_TOLERANCE, DEFAULT_CHROMA_TOLERANCE, ACCURACY };
-
-// The following variables are never be referenced 
-
-const WHITE_COLOR = new RGBColor(1, 1, 1);
-
-const BLACK_COLOR = new RGBColor(0, 0, 0);
-
-const lightTextEmphasis = {
-  HIGH: new RGBColor(1, 1, 1, 1),
-  MEDIUM: new RGBColor(1, 1, 1, 0.6),
-  DISABLED: new RGBColor(1, 1, 1, 0.38)
-};
-
-const darkTextEmphasis = {
-  HIGH: new RGBColor(0, 0, 0, 0.87),
-  MEDIUM: new RGBColor(0, 0, 0, 0.6),
-  DISABLED: new RGBColor(0, 0, 0, 0.38)
-};

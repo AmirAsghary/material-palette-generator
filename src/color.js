@@ -1,51 +1,9 @@
-import { ACCURACY } from './variables.js';
+import {ACCURACY} from './variables.js';
 
 const checkRange = (value, maxValue, label) => {
   if (isNaN(value) || 0 > value || value > maxValue)
     throw new RangeError(value + ' for ' + label + ' is not between 0 and ' + maxValue);
 };
-
-export class HSBColor {
-  constructor(hue, saturation, brightness, alpha = 1) {
-    this.hue = hue;
-    this.saturation = saturation;
-    this.value = brightness;
-    this.alpha = alpha;
-    checkRange(hue, 360, 'hue');
-    checkRange(saturation, 1, 'saturation');
-    checkRange(brightness, 1, 'value');
-    checkRange(alpha, 1, 'alpha');
-  };
-}
-
-export class HSLColor {
-  constructor(hue, saturation, lightness, alpha = 1) {
-    this.hue = hue;
-    this.saturation = saturation;
-    this.lightness = lightness;
-    this.alpha = alpha;
-    checkRange(hue, 360, 'hue');
-    checkRange(saturation, 1, 'saturation');
-    checkRange(lightness, 1, 'lightness');
-    checkRange(alpha, 1, 'alpha');
-  };
-
-  // rotate() is never be called
-  rotate(hueAdjustment) {
-    return new HSLColor((this.hue + hueAdjustment + 360) % 360, this.saturation, this.lightness, this.alpha);
-  }
-
-  // toCSSValue() is never be called
-  toCSSValue() {
-    return (
-      'hsla(' +
-      this.hue + ', ' +
-      100 * this.saturation + '%, ' +
-      100 * this.lightness + '%, ' + this.alpha +
-      ')'
-    );
-  }
-}
 
 export class LABColor {
   constructor(lightness, a, b, alpha = 1) {
@@ -66,7 +24,7 @@ export class LABColor {
       Math.abs(this.alpha - a.alpha) < ACCURACY
     );
   }
-};
+}
 
 export class LCHColor {
   constructor(lightness, chroma, hue, alpha = 1) {
@@ -111,25 +69,4 @@ export class RGBColor {
       Math.abs(this.alpha - rgbColor.alpha) < ACCURACY
     );
   }
-
-  // toCSSValue() is never be called
-  toCSSValue() {
-    return (
-      'rgba(' +
-      100 * this.red + '%, ' +
-      100 * this.green + '%, ' +
-      100 * this.blue + '%, ' +
-      this.alpha +
-      ')'
-    );
-  }
-}
-
-export class XYZColor {
-  constructor(x, y, z, alpha = 1) {
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    this.alpha = alpha;
-  };
 }
