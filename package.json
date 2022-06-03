@@ -1,5 +1,5 @@
 {
-  "name": "materialifer",
+  "name": "materialifier",
   "version": "1.0.0",
   "description": "Material design palette generator",
   "main": "dist/index.js",
