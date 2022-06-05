@@ -66,3 +66,4 @@ typings/
 /configuration_public.json
 /deploy/configuration/local
 /dist/
+/junit.xml
