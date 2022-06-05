@@ -1,4 +1,4 @@
-import {ACCURACY} from './variables.js';
+import {ACCURACY} from './variables';
 
 const checkRange = (value: number, maxValue: number, label: string) => {
   if (isNaN(value) || 0 > value || value > maxValue)

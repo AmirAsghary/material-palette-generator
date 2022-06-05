@@ -5,7 +5,7 @@ import {
   GOLDEN_LIGHT_PALETTES,
   GOLDEN_PALETTES,
   REDUCED_CHROMA_TOLERANCE
-} from './variables.js';
+} from './variables';
 import {LABColor, LCHColor, RGBColor} from './colors';
 import {hex2rgb, lab2hue, lab2lch, lch2rgb, rgb2lab} from './utils';
 
