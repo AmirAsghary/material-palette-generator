@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "rollup -c --environment NODE_ENV:production",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint src/*.js src/*.jsx"
   },
   "keywords": [

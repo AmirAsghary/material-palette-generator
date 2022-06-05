@@ -10,25 +10,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-    - name: Use Node.js '16'
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-        cache: 'yarn'
-    - run: yarn install
-    - run: yarn global add rollup
-    - run: yarn build
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Use Node.js '16'
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn global add rollup
+      - run: yarn build
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-    - name: Use Node.js '16'
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-        cache: 'yarn'
-    - run: yarn install
-    - run: yarn test
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Use Node.js '16'
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - run: yarn install
+      - run: yarn test
+      - uses: codecov/codecov-action@v3.1.0
+        with:
+          files: ./coverage/lcov.info
+          flags: unittests
+          fail_ci_if_error: true
+          verbose: true
