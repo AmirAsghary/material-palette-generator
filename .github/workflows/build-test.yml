@@ -32,16 +32,9 @@ jobs:
           cache: 'yarn'
       - run: yarn install
       - run: yarn test
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v3
-        with:
-          name: code-coverage-report
-          path: |
-            ./coverage/
-            ./junit.xml
       - uses: codecov/codecov-action@v3.1.0
         with:
-          files: ./junit.xml
+          files: ./coverage/lcov.info
           flags: unittests
           fail_ci_if_error: true
           verbose: true
