@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/AmirAsghary/materialifier/branch/master/graph/badge.svg?token=P2MUOEK82Z)](https://codecov.io/gh/AmirAsghary/materialifier)
+
 ## Demo
 Material color palette generator
 
