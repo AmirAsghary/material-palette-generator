@@ -7,7 +7,7 @@ import {
   REDUCED_CHROMA_TOLERANCE
 } from './variables';
 import {LABColor, LCHColor, RGBColor} from './colors';
-import {hex2rgb, lab2hue, lab2lch, lch2rgb, rgb2lab} from './utils';
+import {hex2rgb, lab2hue, lab2lch, lch2rgb, rgb2hex, rgb2lab} from './utils';
 
 function findClosestGoldenPalette(labColor:LABColor, goldenPalettes = GOLDEN_PALETTES) {
   let minEmpfindungDifference = Infinity;
@@ -104,7 +104,7 @@ function generatePalette(sourceRgbColor: RGBColor, goldenPalettes = GOLDEN_PALET
   return closestGoldenPallete.map((goldenLabColor, index) => {
     if (goldenLabColor === closestGoldenLabColor) {
       lightnessMaximum = Math.max(sourceLchColor.lightness - 1.7, 0);
-      return sourceRgbColor;
+      return rgb2hex(sourceRgbColor);
     }
 
     if (index === 10) {
@@ -125,7 +125,7 @@ function generatePalette(sourceRgbColor: RGBColor, goldenPalettes = GOLDEN_PALET
 
     lightnessMaximum = Math.max(lchColor.lightness - lightnessMinimumStep, 0);
 
-    return lch2rgb(lchColor);
+    return rgb2hex(lch2rgb(lchColor));
   });
 }
 

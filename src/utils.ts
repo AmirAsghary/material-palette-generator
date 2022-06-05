@@ -32,6 +32,20 @@ function hex2rgb(hexColor: string) {
     return new RGBColor(red, green, blue, alpha);
 }
 
+function decimal2hex(decimal: number) {
+    let hexDecimal = decimal.toString(16);
+    return 2 <= hexDecimal.length ? hexDecimal : '0' + hexDecimal;
+}
+
+function rgb2hex(rgbColor: RGBColor) {
+    return '#' + (
+        decimal2hex(Math.round(255 * rgbColor.red)) +
+        decimal2hex(Math.round(255 * rgbColor.green)) +
+        decimal2hex(Math.round(255 * rgbColor.blue)) +
+        (1 > rgbColor.alpha ? decimal2hex(Math.round(255 * rgbColor.alpha)) : '')
+    );
+}
+
 function lab2hue(a: number, b: number) {
     if (1e-4 > Math.abs(a) && 1e-4 > Math.abs(b)) return 0;
     a = (180 * Math.atan2(a, b)) / Math.PI;
@@ -136,5 +150,5 @@ function lch2rgb(lchColor: LCHColor) {
 
 export {
     lab2hue, rgb2lab, lab2lch, lch2rgb,
-    hex2lab, hex2rgb
+    hex2lab, hex2rgb, rgb2hex
 };
