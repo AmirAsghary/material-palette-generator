@@ -32,6 +32,7 @@ jobs:
         cache: 'yarn'
     - run: yarn install
     - run: yarn test
+    - run: ls
     - uses: codecov/codecov-action@v3.1.0
       with:
         files: ./junit.xml
