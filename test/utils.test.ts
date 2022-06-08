@@ -1,4 +1,4 @@
-import {throwIfNotInRange} from "../src/utils";
+import {hex2rgb, throwIfNotInRange} from "../src/utils";
 
 describe('throwIfNotInRange util', () => {
     it('Number -1, max 10, min 0', () => {
@@ -15,5 +15,14 @@ describe('throwIfNotInRange util', () => {
     });
     it('Max -10, min 10', () => {
         expect(() => throwIfNotInRange(0, -10, '', 10)).toThrow();
+    });
+});
+
+describe('hex2rgb util', () => {
+    it('Invalid characters in hex', () => {
+        expect(() => hex2rgb('#ASD@23')).toThrow();
+    });
+    it('Invalid hex length', () => {
+        expect(() => hex2rgb('#FAFAFAFAFA')).toThrow();
     });
 });
