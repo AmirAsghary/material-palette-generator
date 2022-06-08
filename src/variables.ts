@@ -1,9 +1,7 @@
 import {LABColor} from './colors';
 import {hex2lab} from './utils';
 
-const ACCURACY = Math.pow(2, -16);
-
-const GOLDEN_DARK_PALETTES = [
+export const GOLDEN_DARK_PALETTES = [
   [
     hex2lab('595959'),
     hex2lab('545454'),
@@ -18,7 +16,7 @@ const GOLDEN_DARK_PALETTES = [
   ]
 ];
 
-const GOLDEN_LIGHT_PALETTES = [
+export const GOLDEN_LIGHT_PALETTES = [
   [
     hex2lab('FAFAFA'),
     hex2lab('F5F5F5'),
@@ -33,7 +31,7 @@ const GOLDEN_LIGHT_PALETTES = [
   ]
 ];
 
-const GOLDEN_PALETTES = [
+export const GOLDEN_PALETTES = [
   [
     new LABColor(94.67497003305085, 7.266715066863771, 1.000743882272359),
     new LABColor(86.7897416761699, 18.370736761658012, 4.23637133971424),
@@ -264,7 +262,7 @@ const GOLDEN_PALETTES = [
   ]
 ];
 
-const DEFAULT_LIGHTNESS_TOLERANCE = [ //standard deviation for lightness in each tone
+export const DEFAULT_LIGHTNESS_TOLERANCE = [ //standard deviation for lightness in each tone
   2.048875457,
   5.124792061,
   8.751659557,
@@ -277,7 +275,7 @@ const DEFAULT_LIGHTNESS_TOLERANCE = [ //standard deviation for lightness in each
   15.09818372
 ];
 
-const REDUCED_CHROMA_TOLERANCE = [
+export const REDUCED_CHROMA_TOLERANCE = [
   1.762442714,
   4.213532634,
   7.395827458,
@@ -290,7 +288,7 @@ const REDUCED_CHROMA_TOLERANCE = [
   16.88410864
 ];
 
-const DEFAULT_CHROMA_TOLERANCE = [ //standard deviation for chroma in each tone, apart from 'grey' palletes (brown, grey, blue grey)
+export const DEFAULT_CHROMA_TOLERANCE = [ //standard deviation for chroma in each tone, apart from 'grey' palletes (brown, grey, blue grey)
   1.762442714,
   4.213532634,
   7.395827458,
@@ -302,5 +300,3 @@ const DEFAULT_CHROMA_TOLERANCE = [ //standard deviation for chroma in each tone,
   17.35916727,
   19.88410864
 ];
-
-export { GOLDEN_DARK_PALETTES, GOLDEN_LIGHT_PALETTES, GOLDEN_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, REDUCED_CHROMA_TOLERANCE, DEFAULT_CHROMA_TOLERANCE, ACCURACY };
