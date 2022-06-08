@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/gh/AmirAsghary/materialifier/branch/master/graph/badge.svg?token=P2MUOEK82Z)](https://codecov.io/gh/AmirAsghary/materialifier)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/materialifier?label=GZIP%20%2B%20Minified)
 
 # Materialifier
 Generates color palettes based on the Material design color system
