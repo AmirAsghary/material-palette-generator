@@ -8,8 +8,9 @@ import {
 } from './variables';
 import {LABColor, LCHColor, RGBColor} from './colors';
 import {hex2rgb, lab2hue, lab2lch, lch2rgb, rgb2hex, rgb2lab} from './utils';
+import {ColorPalette} from "./models";
 
-function findClosestGoldenPalette(labColor:LABColor, goldenPalettes = GOLDEN_PALETTES) {
+function findClosestGoldenPalette(labColor: LABColor, goldenPalettes = GOLDEN_PALETTES) {
   let minEmpfindungDifference = Infinity;
   let closestGoldenPallete = goldenPalettes[0];
   let closestColorIndex = -1;
@@ -129,6 +130,8 @@ function generatePalette(sourceRgbColor: RGBColor, goldenPalettes = GOLDEN_PALET
   });
 }
 
+function generateAccentPalette(baseColor: string): ColorPalette;
+function generateAccentPalette(baseColor: RGBColor): ColorPalette;
 function generateAccentPalette(baseColor: RGBColor | string) {
   let srcColor = baseColor;
   if (typeof srcColor === 'string')
@@ -136,6 +139,8 @@ function generateAccentPalette(baseColor: RGBColor | string) {
   return generatePalette(srcColor, GOLDEN_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, DEFAULT_CHROMA_TOLERANCE)
 }
 
+function generateLightPalette(baseColor: string): ColorPalette;
+function generateLightPalette(baseColor: RGBColor): ColorPalette;
 function generateLightPalette(baseColor: RGBColor | string) {
   let srcColor = baseColor;
   if (typeof srcColor === 'string')
@@ -143,6 +148,8 @@ function generateLightPalette(baseColor: RGBColor | string) {
   return generatePalette(srcColor, GOLDEN_LIGHT_PALETTES, DEFAULT_LIGHTNESS_TOLERANCE, REDUCED_CHROMA_TOLERANCE)
 }
 
+function generateDarkPalette(baseColor: string): ColorPalette;
+function generateDarkPalette(baseColor: RGBColor): ColorPalette;
 function generateDarkPalette(baseColor: RGBColor | string) {
   let srcColor = baseColor;
   if (typeof srcColor === 'string')
