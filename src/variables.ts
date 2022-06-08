@@ -1,8 +1,6 @@
 import {LABColor} from './colors';
 import {hex2lab} from './utils';
 
-export const ACCURACY = Math.pow(2, -16);
-
 export const GOLDEN_DARK_PALETTES = [
   [
     hex2lab('595959'),
