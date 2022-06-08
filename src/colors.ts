@@ -1,7 +1,4 @@
-const checkRange = (value: number, maxValue: number, label: string) => {
-  if (isNaN(value) || 0 > value || value > maxValue)
-    throw new RangeError(value + ' for ' + label + ' is not between 0 and ' + maxValue);
-};
+import {throwIfNotInRange} from "./utils";
 
 export class LABColor {
   lightness: number;
@@ -14,8 +11,8 @@ export class LABColor {
     this.a = a;
     this.b = b;
     this.alpha = alpha;
-    checkRange(lightness, Number.MAX_VALUE, 'lightness');
-    checkRange(alpha, 1, 'alpha');
+    throwIfNotInRange(lightness, Number.MAX_VALUE, 'lightness');
+    throwIfNotInRange(alpha, 1, 'alpha');
   }
 }
 
@@ -30,10 +27,10 @@ export class LCHColor {
     this.chroma = chroma;
     this.hue = hue;
     this.alpha = alpha;
-    checkRange(lightness, Number.MAX_VALUE, 'lightness');
-    checkRange(chroma, Number.MAX_VALUE, 'chroma');
-    checkRange(hue, 360, 'hue');
-    checkRange(alpha, 1, 'alpha');
+    throwIfNotInRange(lightness, Number.MAX_VALUE, 'lightness');
+    throwIfNotInRange(chroma, Number.MAX_VALUE, 'chroma');
+    throwIfNotInRange(hue, 360, 'hue');
+    throwIfNotInRange(alpha, 1, 'alpha');
   };
 }
 
@@ -48,10 +45,10 @@ export class RGBColor {
     this.green = green;
     this.blue = blue;
     this.alpha = alpha;
-    checkRange(red, 1, 'red');
-    checkRange(green, 1, 'green');
-    checkRange(blue, 1, 'blue');
-    checkRange(alpha, 1, 'alpha');
+    throwIfNotInRange(red, 1, 'red');
+    throwIfNotInRange(green, 1, 'green');
+    throwIfNotInRange(blue, 1, 'blue');
+    throwIfNotInRange(alpha, 1, 'alpha');
   }
 }
 

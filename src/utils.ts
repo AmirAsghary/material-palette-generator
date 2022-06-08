@@ -148,7 +148,12 @@ function lch2rgb(lchColor: LCHColor) {
     return xyz2rgb(lab2xyz(lch2lab(lchColor)));
 }
 
+function throwIfNotInRange(number: number, maxValue: number, label?: string, minValue = 0) {
+    if (isNaN(number) || minValue > number || number > maxValue)
+        throw new RangeError(number + ' for ' + label + ` is not between ${minValue} and ` + maxValue);
+}
+
 export {
     lab2hue, rgb2lab, lab2lch, lch2rgb,
-    hex2lab, hex2rgb, rgb2hex
+    hex2lab, hex2rgb, rgb2hex, throwIfNotInRange
 };
